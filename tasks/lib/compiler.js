@@ -54,7 +54,13 @@ module.exports = {
 				.split("\t").join("';")
 				.split("%>").join("p +='")
 			+ "';return p;}";
-		var ast = uglify.parse(tmp);
+        try{
+            var ast = uglify.parse(tmp);
+        }catch(e){
+            console.log(e);
+            console.log('编译错误,行：' + e.line + ',列:' + e.col);
+        }
+
 
 		var walker = new uglify.TreeWalker(function (node) {
 			//Variables
