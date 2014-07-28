@@ -7,6 +7,7 @@
 'use strict';
 
 var uglify = require("uglify-js");
+var pre = require('./pre');
 
 module.exports = {
 	/**
@@ -35,30 +36,14 @@ module.exports = {
 			"require", "modue", "exports"
 		];
 
-		// Figure out if we're getting a template, or if we need to
-		// load the template - and be sure to cache the result.
-		// Generate a reusable function that will serve as a template
-		// generator (and which will be cached).
-		var tmp = "function anonymous(data){var p='';" +
-			// Introduce the data as local variables using with(){}
-			"p +='" +
-			// Convert the template into pure JavaScript
-			code
-				.replace(/[\r\t\n]/g, " ")
-				.split("<%").join("\t")
-				//replace str ' to \\'
-				.replace(/(?:(^|%>)([^\t]*))/g, function ($0, $1, $2) {
-					return $1 + $2.replace(/('|\\)/g, "\\$1")
-				})
-				.replace(/\t=(.*?)%>/g, "'; p+=$1; p+='")
-				.split("\t").join("';")
-				.split("%>").join("p +='")
-			+ "';return p;}";
+
+        var tmp = pre.toPureJs(code);
+        console.log(tmp);
         try{
             var ast = uglify.parse(tmp);
         }catch(e){
-            console.log(e);
-            console.log('编译错误,行：' + e.line + ',列:' + e.col);
+            e.line -= 1;
+            throw e;
         }
 
 

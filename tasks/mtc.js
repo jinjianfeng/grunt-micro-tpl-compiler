@@ -30,7 +30,9 @@ module.exports = function (grunt) {
                     dest = compiler.process(src)
                 }
                 catch (e) {
-                    return grunt.log.warn(e.toString());
+                    return grunt.log.warn('模版文件(' + filepath + ')编译错误: 行' + e.line + ',列:' + e.col);
+                    //return grunt.log.warn(e.toString());
+                    return '';
                 }
 
                 if (dest.length === 0) {

@@ -28,7 +28,8 @@
         "grunt-contrib-clean": "^0.5.0",
         "grunt-contrib-jshint": "^0.9.2",
         "grunt-contrib-nodeunit": "^0.3.3",
-        "grunt-contrib-watch": "^0.6.1"
+        "grunt-contrib-watch": "^0.6.1",
+        "kissy": "1.4.2-1"
     },
     "dependencies": {
         "uglify-js": "^2.4.15"
