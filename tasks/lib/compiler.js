@@ -7,7 +7,7 @@
 'use strict';
 
 var uglify = require("uglify-js");
-var pre = require('./pre');
+var pre = require('./preprocessor');
 
 module.exports = {
 	/**
@@ -38,7 +38,6 @@ module.exports = {
 
 
         var tmp = pre.toPureJs(code);
-        console.log(tmp);
         try{
             var ast = uglify.parse(tmp);
         }catch(e){

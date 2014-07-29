@@ -6,8 +6,8 @@
 
 module.exports = function (grunt) {
     'use strict';
-    var compiler = require('./lib/compiler')
-    var wrap = require('./lib/wrap')
+    var compiler = require('./lib/compiler');
+    var wrap = require('./lib/wrap');
 
     grunt.registerMultiTask('mtc', 'micro template compiler', function () {
         var options = this.options({
@@ -30,9 +30,7 @@ module.exports = function (grunt) {
                     dest = compiler.process(src)
                 }
                 catch (e) {
-                    return grunt.log.warn('模版文件(' + filepath + ')编译错误: 行' + e.line + ',列:' + e.col);
-                    //return grunt.log.warn(e.toString());
-                    return '';
+                    return grunt.log.warn('模版文件(' + filepath + ')编译错误:\n 行:' + e.line + '\n message:' + e.message);
                 }
 
                 if (dest.length === 0) {
